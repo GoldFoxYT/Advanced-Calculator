@@ -7,7 +7,7 @@ public class Calculator extends performOperation {
         boolean continueCalculation = true;
 
         while (continueCalculation) {
-            displayMenu();
+            displayMainMenu();
             int operation;
 
             while (true){
@@ -25,7 +25,7 @@ public class Calculator extends performOperation {
                 }
             }
 
-            Double result = performOperation(sc, operation);
+            Double result = operate(sc, operation);
 
             if (result != null) {
                 System.out.println("Result: " + result);

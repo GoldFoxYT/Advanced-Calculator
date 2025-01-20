@@ -2,7 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class performOperation extends displayMenu {
-    protected static Double performOperation(Scanner sc, int operation) {
+    protected static Double operate(Scanner sc, int operation) {
         double num1, num2;
 
         switch (operation) {
@@ -18,6 +18,12 @@ public class performOperation extends displayMenu {
                 System.out.println("Enter the number for the cube root: ");
                 num1 = getValidNumber(sc);
                 return Math.cbrt(num1);
+            case 7:
+                System.out.println("Enter the base number: ");
+                num1 = getValidNumber(sc);
+                System.out.println("Enter the exponent: ");
+                num2 = getValidNumber(sc);
+                return Math.pow(num1, num2);
             default:
                 System.out.println("Enter the first number: ");
                 num1 = getValidNumber(sc);
