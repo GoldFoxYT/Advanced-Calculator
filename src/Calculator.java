@@ -8,35 +8,35 @@ public class Calculator extends performOperation {
 
         while (continueCalculation) {
             displayMainMenu();
-            int operation;
+            int operation = getValidOperation(sc);
 
-            while (true){
-                try{
-                    System.out.println("Enter operation number: ");
-                    operation = sc.nextInt();
-                    if (operation < 1 || operation > getOperationCount()) {
-                        System.out.println("Invalid operation. Please enter a valid number.");
-                        continue;
-                    }
-                    break;
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a number.");
-                    sc.next();
-                }
+            OperationResult result = operate(sc, operation);
+
+            if (result != null && result.getValue() != null) {
+                System.out.println("Expression: " + result.getExpression());
+                System.out.println("Result: " + result.getFormattedResult()); // Use formatted result
             }
 
-            Double result = operate(sc, operation);
-
-            if (result != null) {
-                System.out.println("Result: " + result);
-            }
-            System.out.println("Do you want to perform another calculation? (y/n)");
-            String userResponse = sc.next();
-            if (!userResponse.equalsIgnoreCase("y")) {
+            System.out.println("Perform another calculation? (y/n)");
+            if (!sc.next().equalsIgnoreCase("y")) {
                 continueCalculation = false;
             }
         }
         sc.close();
-        System.out.println("Thank you for using the calculator. Goodbye!");
+        System.out.println("Thank you for using the calculator!");
+    }
+
+    private static int getValidOperation(Scanner sc) {
+        while (true) {
+            try {
+                System.out.print("Enter operation number: ");
+                int op = sc.nextInt();
+                if (op >= 1 && op <= getOperationCount()) return op;
+                System.out.println("Invalid operation. Try again.");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Enter a number.");
+                sc.next();
+            }
+        }
     }
 }
